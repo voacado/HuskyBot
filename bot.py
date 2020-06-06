@@ -17,13 +17,7 @@ BOT_TOKEN = "TOKEN ID GOES HERE" # Token ID MUST be a string (in quotes)!
 ####################
 
 # Creates the instances, uses "!" to activate commands
-# Client used to verify user in guild
 bot = commands.Bot(command_prefix='!')
-client = discord.Client()
-
-# Check if user is in guild/server
-# guild = client.guild.get(GUILD_ID)
-
 
 # "!conf" command
 @bot.command()
