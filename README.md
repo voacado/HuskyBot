@@ -16,14 +16,16 @@ Private message a bot and have it output your message into a separate channel (a
 
 
 ## Running
+    # For the host:
     python bot.py
 
+    # For the user:
     Private message a bot: !conf (message)
 
 ## Things the User Must Do
-Before running the bot, add the following 2 IDs into the bot.py file:
-* Channel ID
-* Bot Token ID
+Before running the bot, add the following 2 IDs in the bot.py file (at the top):
+* Channel ID (int)
+* Bot Token ID (string)
 
 ## Requirements
 Requires Python, discord.py and NodeJS.

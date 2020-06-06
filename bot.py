@@ -2,6 +2,13 @@ from discord.ext import commands
 from datetime import datetime
 import discord
 
+# Specific information necessary for bot to function
+# Obtain channel ID by right-clicking the channel and clicking "Copy ID"
+CHANNEL_ID = ID_GOES_HERE #Channel ID MUST be an int, not a string!
+
+# Obtain bot token from Discord Developer Site
+BOT_TOKEN = "TOKEN_GOES_HERE" # Token ID MUST be a string (in quotes)!
+
 # Creates the instance, uses "!" to activate commands
 bot = commands.Bot(command_prefix='!')
 
@@ -9,18 +16,18 @@ bot = commands.Bot(command_prefix='!')
 @bot.command()
 async def conf(ctx, *, message : str):
 
-    # Assigns Discord channel
-    channel = bot.get_channel(Your Channel ID Here) #Channel ID MUST be an int, not a string!
-
-    # Create embed message (looks better)
-    embed = discord.Embed(title=message)
+    # Assigns Discord channel (given channel ID)
+    channel = bot.get_channel(CHANNEL_ID)
 
     # datetime object containing current date and time
     now = datetime.now()
-    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    currentTime = now.strftime("%d/%m %H:%M")
+
+    # Create embed message (looks better)
+    embed = discord.Embed(description=message)
 
     # Set date/time as footer of embed
-    embed.set_footer(text=dt_string)
+    embed.set_footer(text=currentTime)
 
     # Send message to channel
     await channel.send(embed=embed)
@@ -28,4 +35,5 @@ async def conf(ctx, *, message : str):
     # Inform user their message has been sent
     await ctx.send("Your message has been sent!")
 
-bot.run("Your Token ID Here") # Token ID MUST be a string (in quotes)!
+# Runs the bot given bot token ID
+bot.run(BOT_TOKEN)
