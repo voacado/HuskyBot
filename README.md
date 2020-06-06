@@ -1,7 +1,14 @@
 # HuskyBot
-A Discord bot for the Northeastern '24 server.
+A Discord bot for the Northeastern '24 server. 
 
+Private message a bot and have it output your message into a separate channel (anonymously)!
+
+Example Private Message
 ![Private Message the Bot](pictures/botPM.png)
+
+
+Example Output
+
 ![Output](pictures/botOutput.png)
 
 
