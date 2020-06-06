@@ -2,38 +2,62 @@ from discord.ext import commands
 from datetime import datetime
 import discord
 
+####################
+
 # Specific information necessary for bot to function
+# Obtain guild ID by right-clicking the server and clicking "Copy ID"
+GUILD_ID = SERVER ID GOES HERE # Guild ID MUST be an int, not a string!
+
 # Obtain channel ID by right-clicking the channel and clicking "Copy ID"
-CHANNEL_ID = ID_GOES_HERE #Channel ID MUST be an int, not a string!
+CHANNEL_ID = CHANNEL ID GOES HERE #Channel ID MUST be an int, not a string!
 
 # Obtain bot token from Discord Developer Site
-BOT_TOKEN = "TOKEN_GOES_HERE" # Token ID MUST be a string (in quotes)!
+BOT_TOKEN = "TOKEN ID GOES HERE" # Token ID MUST be a string (in quotes)!
 
-# Creates the instance, uses "!" to activate commands
+####################
+
+# Creates the instances, uses "!" to activate commands
+# Client used to verify user in guild
 bot = commands.Bot(command_prefix='!')
+client = discord.Client()
+
+# Check if user is in guild/server
+# guild = client.guild.get(GUILD_ID)
+
 
 # "!conf" command
 @bot.command()
 async def conf(ctx, *, message : str):
 
-    # Assigns Discord channel (given channel ID)
-    channel = bot.get_channel(CHANNEL_ID)
+    # Obtains User ID and nickname to verify user is in guild/server
+    userID = (ctx.message.author.id)
+    server = bot.get_guild(GUILD_ID)
+    member = server.get_member(userID)
 
-    # datetime object containing current date and time
-    now = datetime.now()
-    currentTime = now.strftime("%d/%m %H:%M")
+    # If member is a member of the server, they will have a name (instead of None)
+    if member != None:
+      # Assigns Discord channel (given channel ID)
+      channel = bot.get_channel(CHANNEL_ID)
 
-    # Create embed message (looks better)
-    embed = discord.Embed(description=message)
+      # datetime object containing current date and time
+      now = datetime.now()
+      currentTime = now.strftime("%d/%m %H:%M")
 
-    # Set date/time as footer of embed
-    embed.set_footer(text=currentTime)
+      # Create embed message (looks better)
+      embed = discord.Embed(description=message)
 
-    # Send message to channel
-    await channel.send(embed=embed)
+      # Set date/time as footer of embed
+      embed.set_footer(text=currentTime)
 
-    # Inform user their message has been sent
-    await ctx.send("Your message has been sent!")
+      # Send message to channel
+      await channel.send(embed=embed)
+
+      # Inform user their message has been sent
+      await ctx.send("Your message has been sent!")
+
+    # If member is not a member is the server, they will be tagged None
+    else:
+      await ctx.send("You are not a member of the server! The message was not sent.")     
 
 # Runs the bot given bot token ID
 bot.run(BOT_TOKEN)
