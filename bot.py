@@ -5,7 +5,7 @@ import discord
 # Creates the instance, uses "!" to activate commands
 bot = commands.Bot(command_prefix='!')
 
-# "!dm" command
+# "!conf" command
 @bot.command()
 async def conf(ctx, *, message : str):
 
