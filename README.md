@@ -5,8 +5,6 @@ A Discord bot for the Northeastern '24 server.
 Requires Python, discord.py and NodeJS.
 
 ## Installing discord.py
-.. code:: sh
-
     # Linux/macOS
     python3 -m pip install -U discord.py
 
