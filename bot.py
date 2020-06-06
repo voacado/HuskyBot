@@ -25,4 +25,7 @@ async def conf(ctx, *, message : str):
     # Send message to channel
     await channel.send(embed=embed)
 
+    # Inform user their message has been sent
+    await ctx.send("Your message has been sent!")
+
 bot.run("Your Token ID Here") # Token ID MUST be a string (in quotes)!
