@@ -8,7 +8,6 @@ Example Private Message
 
 
 Example Output
-
 ![Output](pictures/botOutput.png)
 
 
