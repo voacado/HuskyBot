@@ -1,18 +1,19 @@
 from discord.ext import commands
 from datetime import datetime
+from io import BytesIO
 import discord
 
 ####################
 
 # Specific information necessary for bot to function
 # Obtain guild ID by right-clicking the server and clicking "Copy ID"
-GUILD_ID = SERVER ID GOES HERE # Guild ID MUST be an int, not a string!
+GUILD_ID = ID_HERE # Guild ID MUST be an int, not a string!
 
 # Obtain channel ID by right-clicking the channel and clicking "Copy ID"
-CHANNEL_ID = CHANNEL ID GOES HERE #Channel ID MUST be an int, not a string!
+CHANNEL_ID = ID_HERE #Channel ID MUST be an int, not a string!
 
 # Obtain bot token from Discord Developer Site
-BOT_TOKEN = "TOKEN ID GOES HERE" # Token ID MUST be a string (in quotes)!
+BOT_TOKEN = "ID_HERE" # Token ID MUST be a string (in quotes)!
 
 ####################
 
@@ -43,7 +44,18 @@ async def conf(ctx, *, message : str):
       # Set date/time as footer of embed
       embed.set_footer(text=currentTime)
 
-      # Send message to channel
+      # Image attachments
+      files = []
+      for file in ctx.message.attachments:
+          fp = BytesIO()
+          await file.save(fp)
+          files.append(discord.File(fp, filename=file.filename, spoiler=file.is_spoiler()))
+          imageURL = ctx.message.attachments[0].url
+          embed.set_image(url=imageURL)
+      # The following prints the image as a separate message
+      # await channel.send(files=files)
+
+      # Send embed message to channel
       await channel.send(embed=embed)
 
       # Inform user their message has been sent
